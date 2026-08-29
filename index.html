@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela & Andrea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+      --color-bg: #f7f4ee;
+      --color-surface-strong: rgba(247, 244, 238, 0.92);
+      --color-surface-soft: rgba(255, 250, 244, 0.86);
+      --color-border: rgba(255, 248, 240, 0.2);
+      --color-divider: rgba(255, 240, 220, 0.45);
+      --color-text: #201a14;
+      --color-text-muted: #6f675d;
+      --color-accent: #6a4f43;
+      --color-button: rgba(35, 25, 18, 0.72);
+      --color-button-hover: rgba(35, 25, 18, 0.88);
+      --color-dot: rgba(128, 99, 61, 0.30);
+      --color-dot-active: rgb(128, 99, 61);
+      --shadow-sm: 0 12px 32px rgba(0, 0, 0, 0.18);
+      --font-display: "Charmonman", cursive;
+      --font-body: "EB Garamond", Georgia, serif;
+    }
+
+    * , *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.75;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      background-image:
+        linear-gradient(rgba(16, 12, 8, 0.52), rgba(16, 12, 8, 0.52)),
+        url('./sfondo_sito2.PNG');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: clamp(var(--space-8), 6vw, var(--space-20)) var(--space-4);
+    }
+
+    .hero {
+      text-align: center;
+      padding: var(--space-16) var(--space-6) var(--space-12);
+      background-image:
+        linear-gradient(rgba(255, 248, 242, 0.42), rgba(255, 248, 242, 0.42)),
+        url("SanNicolaArena.PNG");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      margin: 0 0 var(--space-3);
+      font-size: var(--text-sm);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: var(--space-4) auto 0;
+      max-width: 30ch;
+      font-size: var(--text-lg);
+      color: var(--color-accent);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      margin: var(--space-10) 0;
+      color: #f2e5d5;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      max-width: 220px;
+      background: var(--color-divider);
+    }
+
+    .divider span {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #f3dfc4;
+      transform: translateY(-1px);
+    }
+    .story-text {
+      text-align: center;
+    }
+    .carousel-shell {
+      background: rgba(33, 14, 9, 0.92);
+      border: 1px solid rgba(128, 99, 61, 0.28);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .story {
+      background: var(--color-surface-strong);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .carousel-shell {
+      padding: var(--space-4);
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius-xl) - var(--space-4));
+      background: rgba(33, 14, 9, 0.35);
+      min-height: 380px;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      margin: 0;
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: rgba(33, 14, 9, 0.18);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-slide figcaption {
+      position: absolute;
+      left: var(--space-4);
+      right: var(--space-4);
+      bottom: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      border-radius: 999px;
+      background: rgba(23, 16, 12, 0.56);
+      color: rgba(255, 247, 238, 0.92);
+      font-size: var(--text-sm);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      text-align: center;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: var(--radius-full);
+      background: var(--color-button);
+      color: white;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .carousel-btn:hover {
+      background: var(--color-button-hover);
+    }
+
+    .carousel-btn.prev { left: var(--space-4); }
+    .carousel-btn.next { right: var(--space-4); }
+
+    .carousel-dots {
+      position: absolute;
+      left: 50%;
+      bottom: var(--space-3);
+      transform: translateX(-50%);
+      display: flex;
+      gap: var(--space-2);
+      z-index: 2;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-dot);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--color-dot-active);
+      transform: scale(1.15);
+    }
+
+    .story {
+      padding: clamp(var(--space-6), 4vw, var(--space-12));
+    }
+
+    .story h2 {
+      margin: 0 0 var(--space-6);
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .story p {
+      margin: 0 auto;
+      max-width: 64ch;
+      white-space: pre-line;
+      color: var(--color-text);
+    }
+
+    .directions {
+      background: var(--color-surface-strong);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      padding: clamp(var(--space-8), 5vw, var(--space-16));
+      margin-top: var(--space-12);
+    }
+
+    .directions h2 {
+      margin: 0 0 var(--space-8);
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .directions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .directions-image {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .directions-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .directions-text {
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .directions-grid {
+        grid-template-columns: 1fr;
+      }
+      .directions-image {
+        order: -1;
+      }
+    }
+
+    .footer-note {
+      margin-top: var(--space-12);
+      text-align: center;
+      font-size: var(--text-sm);
+      color: rgba(255, 241, 224, 0.9);
+    }
+
+    @media (max-width: 900px) {
+      body { background-position: 58% center; }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        background-attachment: scroll;
+        background-position: 62% center;
+      }
+
+      .hero { padding-top: var(--space-10); }
+      .carousel { min-height: 240px; }
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+      }
+      .divider::before,
+      .divider::after { max-width: 96px; }
+      .carousel-slide figcaption {
+        left: var(--space-3);
+        right: var(--space-3);
+        bottom: var(--space-3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">Wedding page preview</p>
+      <h1>Daniela &amp; Andrea</h1>
+      <p class="subtitle">Il Matrimonio sta arrivando!</p>
+    </header>
+
+    <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+    <section class="carousel-shell" aria-label="Primo carosello fotografico">
+      <div class="carousel" data-carousel>
+        <button class="carousel-btn prev" type="button" aria-label="Foto precedente">&#10094;</button>
+        <div class="carousel-track">
+          <figure class="carousel-slide">
+            <img src="foto_1.JPEG" alt="Foto 1 di Daniela e Andrea" loading="lazy" />
+            <figcaption>Ti amo con la forza del mare</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="foto_2.JPEG" alt="Foto 2 di Daniela e Andrea" loading="lazy" />
+            <figcaption>Promesse che non si dimenticano</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="foto_3.JPEG" alt="Foto 3 di Daniela e Andrea" loading="lazy" />
+            <figcaption>Meraviglie di Capo Zafferano</figcaption>
+          </figure>
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Foto successiva">&#10095;</button>
+        <div class="carousel-dots" aria-label="Selezione foto">
+          <button class="carousel-dot active" type="button" aria-label="Vai alla foto 1"></button>
+          <button class="carousel-dot" type="button" aria-label="Vai alla foto 2"></button>
+          <button class="carousel-dot" type="button" aria-label="Vai alla foto 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+    <section class="story">
+      <h2>La nostra storia</h2>
+      <p class="story-text">
+        Forse non tutti sapete come ci siamo conosciuti io e Daniela,
+        incontrati una sera al tavolo di un locale di Parma,
+        lei usciva con la mia compagnia di colleghi universitari da poco,
+        io invece era una di quelle poche sere in cui mi facevo vivo,
+        e così da quella prima sera in cui l'ho conosciuta, guarda caso,
+        io non mancavo mai ad una serata in cui i colleghi uscivano e
+        non perdevo mai un occasione di rivederla, anche se devo dire,
+        inizialmente non mi considerava proprio,
+        ma alla fine, proprio una di quelle sere infinite che vivi solo
+        in compagnia, ho trovato il coraggio di dichiararle quello che provavo
+        davvero per lei, e il resto,
+        il resto lo potete vivere insieme a noi in Sicilia, il 5 Giugno 2027.
+      </p>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+    <section class="carousel-shell" aria-label="Secondo carosello fotografico">
+      <div class="carousel" data-carousel>
+        <button class="carousel-btn prev" type="button" aria-label="Foto precedente">&#10094;</button>
+        <div class="carousel-track">
+          <figure class="carousel-slide">
+            <img src="foto_4.JPEG" alt="Foto 4 di Daniela e Andrea" loading="lazy" />
+            <figcaption>Fai tu il caffè ?</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="foto_5.JPEG" alt="Foto 5 di Daniela e Andrea" loading="lazy" />
+            <figcaption>Momenti di intensa spiritualità</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="foto_6.JPEG" alt="Foto 6 di Daniela e Andrea" loading="lazy" />
+            <figcaption>La prima foto non si scorda mai</figcaption>
+          </figure>
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Foto successiva">&#10095;</button>
+        <div class="carousel-dots" aria-label="Selezione foto">
+          <button class="carousel-dot active" type="button" aria-label="Vai alla foto 1"></button>
+          <button class="carousel-dot" type="button" aria-label="Vai alla foto 2"></button>
+          <button class="carousel-dot" type="button" aria-label="Vai alla foto 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+    <section class="directions">
+      <h2>Come arrivare al Castello</h2>
+      <div class="directions-grid">
+        <div class="directions-image">
+          <img src="snicolacastle.JPG" alt="Castello di San Nicola" loading="lazy" />
+        </div>
+        <div class="directions-text">
+          Il castello di San NIcola si trova ___________ 
+		  partendo da Bagheria ________________
+		  per informazioni riguardo le navette: +39 03_ _ _ _ _ _ _ _ _ _ _ _
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">Versione con due caroselli da 3 immagini ciascuno.</p>
+  </main>
+
+  <script>
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const prevBtn = carousel.querySelector('.prev');
+      const nextBtn = carousel.querySelector('.next');
+      const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
+      let index = 0;
+
+      function updateCarousel(newIndex) {
+        index = (newIndex + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('active', dotIndex === index);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => updateCarousel(index - 1));
+      nextBtn.addEventListener('click', () => updateCarousel(index + 1));
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => updateCarousel(dotIndex));
+      });
+
+      updateCarousel(0);
+    });
+  </script>
+</body>
+</html>
