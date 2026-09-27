@@ -332,9 +332,14 @@
 
     @media (max-width: 640px) {
       body {
-        background-attachment: scroll;
-        background-position: 62% center;
-      }
+  background-image:
+    linear-gradient(rgba(16, 12, 8, 0.52), rgba(16, 12, 8, 0.52)),
+    url('./sfondoMobile.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
 
       .hero { padding-top: var(--space-10); }
       .carousel { min-height: 240px; }
