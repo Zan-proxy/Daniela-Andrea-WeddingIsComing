@@ -350,6 +350,94 @@
         bottom: var(--space-3);
       }
     }
+.directions-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: rgba(33, 14, 9, 0.18);
+}
+
+.directions-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.directions-carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.directions-carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.directions-carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-full);
+  transform: translateY(-50%);
+  background: var(--color-button);
+  color: #fff;
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.directions-carousel-btn:hover {
+  background: var(--color-button-hover);
+}
+
+.directions-carousel-btn.prev {
+  left: var(--space-3);
+}
+
+.directions-carousel-btn.next {
+  right: var(--space-3);
+}
+
+.directions-carousel-dots {
+  position: absolute;
+  z-index: 2;
+  bottom: var(--space-3);
+  left: 50%;
+  display: flex;
+  gap: var(--space-2);
+  transform: translateX(-50%);
+}
+
+.directions-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-dot);
+  cursor: pointer;
+}
+
+.directions-carousel-dot.active {
+  background: var(--color-dot-active);
+  transform: scale(1.15);
+}
+
+.directions-description {
+  margin: 0;
+  white-space: pre-line;
+}
+	  
   </style>
 </head>
 <body>
@@ -439,18 +527,56 @@
     <div class="divider" aria-hidden="true"><span>✦</span></div>
 
     <section class="directions">
-      <h2>Come arrivare al Castello</h2>
-      <div class="directions-grid">
-        <div class="directions-image">
-          <img src="snicolacastle.jpg" alt="Castello di San Nicola" loading="lazy" />
+  <h2>Come arrivare al Castello</h2>
+
+  <div class="directions-grid">
+    <div class="directions-image">
+      <div class="directions-carousel" data-directions-carousel>
+        <button
+          class="directions-carousel-btn prev"
+          type="button"
+          aria-label="Foto precedente"
+        >
+          &#10094;
+        </button>
+
+        <div class="directions-carousel-track">
+          <figure class="directions-carousel-slide active">
+            <img src="foto1" alt="Indicazioni per il Castello di San Nicola - foto 1" loading="lazy" />
+          </figure>
+
+          <figure class="directions-carousel-slide">
+            <img src="foto2" alt="Indicazioni per il Castello di San Nicola - foto 2" loading="lazy" />
+          </figure>
+
+          <figure class="directions-carousel-slide">
+            <img src="foto3" alt="Indicazioni per il Castello di San Nicola - foto 3" loading="lazy" />
+          </figure>
         </div>
-        <div class="directions-text">
-          Il castello di San NIcola si trova ___________ 
-		  partendo da Bagheria ________________
-		  per informazioni riguardo le navette: +39 03_ _ _ _ _ _ _ _ _ _ _ _
+
+        <button
+          class="directions-carousel-btn next"
+          type="button"
+          aria-label="Foto successiva"
+        >
+          &#10095;
+        </button>
+
+        <div class="directions-carousel-dots" aria-label="Selezione foto">
+          <button class="directions-carousel-dot active" type="button" aria-label="Vai alla foto 1"></button>
+          <button class="directions-carousel-dot" type="button" aria-label="Vai alla foto 2"></button>
+          <button class="directions-carousel-dot" type="button" aria-label="Vai alla foto 3"></button>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="directions-text" aria-live="polite">
+      <p class="directions-description active">Desc1</p>
+      <p class="directions-description" hidden>Desc2</p>
+      <p class="directions-description" hidden>Desc3</p>
+    </div>
+  </div>
+</section>
 
     <p class="footer-note">Versione con due caroselli da 3 immagini ciascuno.</p>
   </main>
@@ -481,5 +607,50 @@
       updateCarousel(0);
     });
   </script>
+	<script>
+  document.querySelectorAll('[data-directions-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.directions-carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.directions-carousel-slide'));
+    const descriptions = Array.from(
+      carousel.closest('.directions-grid').querySelectorAll('.directions-description')
+    );
+    const previousButton = carousel.querySelector('.prev');
+    const nextButton = carousel.querySelector('.next');
+    const dots = Array.from(carousel.querySelectorAll('.directions-carousel-dot'));
+    let currentIndex = 0;
+
+    function updateDirectionsCarousel(newIndex) {
+      currentIndex = (newIndex + slides.length) % slides.length;
+
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+
+      descriptions.forEach((description, index) => {
+        const isActive = index === currentIndex;
+        description.hidden = !isActive;
+        description.classList.toggle('active', isActive);
+      });
+    }
+
+    previousButton.addEventListener('click', () => {
+      updateDirectionsCarousel(currentIndex - 1);
+    });
+
+    nextButton.addEventListener('click', () => {
+      updateDirectionsCarousel(currentIndex + 1);
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        updateDirectionsCarousel(index);
+      });
+    });
+
+    updateDirectionsCarousel(0);
+  });
+</script>
 </body>
 </html>
